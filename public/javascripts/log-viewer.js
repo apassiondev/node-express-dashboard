@@ -7,9 +7,9 @@ const logWindow = document.querySelector('#log-window')
 
 // Send a message to WebSocket
 connection.onopen = function () {
-    connection.send('Hello from the client')
+    connection.send('Hello from the client!')
+}
 
-    connection.onmessage = function (event) {
-        logWindow.innerHTML = `<p>${event.data}</p>`
-    }
+connection.onmessage = function (event) {
+    logWindow.innerHTML = event.data
 }

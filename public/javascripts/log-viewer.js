@@ -5,11 +5,15 @@ const connection = new WebSocket('ws://localhost:3000')
 // Get a reference to the DOM element #log-window
 const logWindow = document.querySelector('#log-window')
 
+// Get a reference to DOM element #logFilePath
+const filePath = document.getElementById('logFilePath').value
+
 // Send a message to WebSocket
 connection.onopen = function () {
-    connection.send('Hello from the client!')
+    if (filePath) connection.send(filePath)
 }
 
 connection.onmessage = function (event) {
-    logWindow.innerHTML = event.data
+    const logs = (event.data).split("\n").join('<hr>')
+    logWindow.innerHTML = logs
 }
